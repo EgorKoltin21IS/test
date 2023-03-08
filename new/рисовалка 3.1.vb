@@ -1,4 +1,5 @@
-﻿Imports System
+Imports System
+Imports System.Data
 Imports System.Reflection.Metadata
 Imports System.Security.Cryptography.X509Certificates
 
@@ -7,7 +8,7 @@ Module Program
     Dim num01 As Byte, num03 As Byte
     Dim num02 As Integer, x As Integer, y As Integer, x1 As Integer, y1 As Integer
     Sub Main(args As String())
-        Console.WriteLine("1 - гор. линия, 2 - верт. линия, 3 - закр. куб, 4 - пуст. куб, 5 - сетка, 6 - сетка (цвет.), 7 - лесенка")
+        Console.WriteLine("1 - гор. линия, 2 - верт. линия, 3 - закр. куб, 4 - пуст. куб, 5 - сетка, 6 - сетка (цвет.), 7 - лесенка, 8 - шахматы")
         num01 = Console.ReadLine
         Console.WriteLine("Хотите ввести свои данные для построения? 1 - да, 2 - нет.")
         num03 = Console.ReadLine()
@@ -58,7 +59,8 @@ Module Program
                 Else
                     lesenka(8, 4, 20)
                 End If
-
+            Case 8
+                chees()
         End Select
     End Sub
     Sub hline(leftx As Byte, topy As Byte, length As Byte)
@@ -130,20 +132,42 @@ Module Program
     End Sub
     Sub uslovie1()
         If num03 = 1 Then
-            Console.Write("отступ слева = ")
-            x = Console.ReadLine()
-            Console.Write("отступ сверху = ")
-            y = Console.ReadLine()
-            Console.Write("длина = ")
-            x1 = Console.ReadLine()
-            If num01 = 3 Or num01 = 4 Then
-                Console.Write("высота = ")
-                y1 = Console.ReadLine()
-            End If
-            If num01 = 5 Or num01 = 6 Then
-                Console.Write("клеток по вертикали = ")
-                y1 = Console.ReadLine()
+            If num01 < 8 Then
+                Console.Write("отступ слева = ")
+                x = Console.ReadLine()
+                Console.Write("отступ сверху = ")
+                y = Console.ReadLine()
+                Console.Write("длина = ")
+                x1 = Console.ReadLine()
+                If num01 = 3 Or num01 = 4 Then
+                    Console.Write("высота = ")
+                    y1 = Console.ReadLine()
+                End If
+                If num01 = 5 Or num01 = 6 Then
+                    Console.Write("клеток по вертикали = ")
+                    y1 = Console.ReadLine()
+                End If
+            Else
+                Console.WriteLine("Ввод данных не предусмотрен.")
+                Console.ReadLine()
+                Console.Clear()
             End If
         End If
+    End Sub
+    Sub chees()
+        For i1 = 0 To 7
+            For i2 = 0 To 7
+                If (i1 + i2) Mod 2 = 0 Or (i1 + i2) Mod 2 = 2 Then
+                Else
+                    Console.SetCursorPosition((i2 * 8), (i1 * 4))
+                    For i3 = 0 To 3
+                        For i4 = 0 To 7
+                            Console.Write("0")
+                        Next
+                        Console.SetCursorPosition(Console.GetCursorPosition.Left - 8, Console.GetCursorPosition.Top + 1)
+                    Next
+                End If
+            Next
+        Next
     End Sub
 End Module
