@@ -13,6 +13,8 @@ Module Program
         Console.WriteLine("Хотите ввести свои данные для построения? 1 - да, 2 - нет.")
         num03 = Console.ReadLine()
         uslovie1()
+        Console.Clear()
+
         Select Case num01
             Case 1
                 If num03 = 1 Then
@@ -61,6 +63,7 @@ Module Program
                 End If
             Case 8
                 chees()
+                Console.ForegroundColor = ConsoleColor.White
         End Select
     End Sub
     Sub hline(leftx As Byte, topy As Byte, length As Byte)
@@ -150,14 +153,23 @@ Module Program
             Else
                 Console.WriteLine("Ввод данных не предусмотрен.")
                 Console.ReadLine()
-                Console.Clear()
             End If
         End If
     End Sub
     Sub chees()
         For i1 = 0 To 7
             For i2 = 0 To 7
+
                 If (i1 + i2) Mod 2 = 0 Or (i1 + i2) Mod 2 = 2 Then
+                    Console.SetCursorPosition((i2 * 8), (i1 * 4))
+                    Console.ForegroundColor = ConsoleColor.Red
+                    For i3 = 0 To 3
+                        For i4 = 0 To 7
+                            Console.Write("0")
+                        Next
+                        Console.SetCursorPosition(Console.GetCursorPosition.Left - 8, Console.GetCursorPosition.Top + 1)
+                    Next
+                    Console.ForegroundColor = ConsoleColor.Yellow
                 Else
                     Console.SetCursorPosition((i2 * 8), (i1 * 4))
                     For i3 = 0 To 3
